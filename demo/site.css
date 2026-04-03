@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Lobster&display=swap');
+
+:root {
+  --site-font-body: "Google Sans", "Segoe UI", sans-serif;
+  --site-font-display: "Lobster", cursive;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --surface-strong: rgba(255, 255, 255, 0.84);
+  --surface-line: rgba(92, 108, 148, 0.18);
+  --surface-shadow: 0 14px 30px rgba(20, 28, 56, 0.12);
+  --nav-ink: #1d2849;
+  --nav-soft: #607099;
+  --nav-pill: #edf2ff;
+  --nav-pill-line: #cfd8fb;
+  --nav-active: #1a2960;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--site-font-body);
+}
+
+a {
+  color: inherit;
+}
+
+.site-nav-wrap {
+  max-width: 1280px;
+  margin: 16px auto 0;
+  padding: 0 20px;
+  position: sticky;
+  top: 10px;
+  z-index: 30;
+}
+
+.site-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--surface-shadow);
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--nav-ink);
+  min-width: 0;
+}
+
+.site-brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f7f9ff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #1a2f73 0%, #2f63df 100%);
+  box-shadow: 0 10px 18px rgba(24, 52, 145, 0.24);
+}
+
+.site-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.site-brand-copy strong {
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.site-brand-copy span {
+  color: var(--nav-soft);
+  font-size: 0.76rem;
+  line-height: 1.1;
+}
+
+.site-nav-toggle {
+  display: none;
+}
+
+.site-nav-button {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--nav-pill-line);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.site-nav-button span {
+  width: 18px;
+  height: 2px;
+  background: var(--nav-ink);
+  border-radius: 2px;
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: var(--nav-ink);
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.site-nav-links a:hover {
+  background: var(--nav-pill);
+  border-color: var(--nav-pill-line);
+}
+
+.site-nav-links a.is-active {
+  background: var(--nav-active);
+  border-color: var(--nav-active);
+  color: #f5f7ff;
+}
+
+.site-nav-links a.is-accent {
+  background: var(--nav-pill);
+  border-color: var(--nav-pill-line);
+}
+
+@media (max-width: 860px) {
+  .site-nav-wrap {
+    padding: 0 14px;
+  }
+
+  .site-nav-button {
+    display: inline-flex;
+  }
+
+  .site-nav-links {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    padding: 12px;
+    border: 1px solid var(--surface-line);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--surface-shadow);
+    flex-direction: column;
+  }
+
+  .site-nav-links a {
+    width: 100%;
+  }
+
+  .site-nav-toggle:checked ~ .site-nav-links {
+    display: flex;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-brand-copy span {
+    display: none;
+  }
+}
+
+.site-credit {
+  max-width: 1280px;
+  margin: 28px auto 24px;
+  padding: 0 20px;
+  text-align: center;
+  color: #607099;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.site-credit a {
+  color: #1a2960;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-credit a:hover {
+  text-decoration: underline;
+}

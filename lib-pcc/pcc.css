@@ -1,0 +1,574 @@
+:root {
+  --pcc-brand: #14684d;
+  --pcc-brand-dark: #0f4f39;
+  --pcc-accent: #2f9271;
+  --pcc-danger: #bf2a2a;
+  --pcc-danger-soft: rgba(191, 42, 42, 0.14);
+}
+
+.wpcc-preview {
+  border: 1px solid #ccd7d5;
+  border-radius: 8px;
+  background: #f9fcfb;
+  padding: 18px;
+  min-height: 120px;
+  transition: border-color 0.24s ease, box-shadow 0.24s ease, transform 0.24s ease;
+}
+
+.wpcc-preview.pcc-review-ready {
+  border-color: #2f9271;
+  box-shadow: 0 0 0 3px rgba(47, 146, 113, 0.14), 0 14px 30px rgba(15, 79, 57, 0.12);
+  transform: translateY(-2px);
+}
+
+.pcc-total {
+  margin: 0 0 14px;
+  color: #145640;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.pcc-content {
+  color: #233d39;
+}
+
+.pcc-content fieldset {
+  border: 1px dashed #8aa8a2;
+  border-radius: 6px;
+  padding: 10px 12px 12px;
+  margin: 12px 0 0;
+  background: #f4faf8;
+}
+
+.pcc-content legend {
+  font-weight: 700;
+  padding: 0 8px;
+  color: #21433f;
+}
+
+.pcc-content ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.pcc-content li + li {
+  margin-top: 6px;
+}
+
+.pcc-required-mark {
+  color: #bf2a2a;
+  font-weight: 700;
+}
+
+.pcc-mail-dialog-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.pcc-email {
+  flex: 1 1 280px;
+  width: 280px;
+  max-width: 100%;
+  border: 1px solid #9eb5af;
+  border-radius: 6px;
+  min-height: 44px;
+  padding: 11px 12px;
+  font: 400 14px/1.35 "Google Sans", "Segoe UI", sans-serif;
+}
+
+.pcc-email:focus {
+  outline: none;
+  border-color: #3f8f74;
+  box-shadow: 0 0 0 3px rgba(63, 143, 116, 0.16);
+}
+
+.pcc-invalid {
+  border-color: var(--pcc-danger) !important;
+  box-shadow: 0 0 0 2px var(--pcc-danger-soft);
+}
+
+.pcc-cond-hidden {
+  display: none !important;
+}
+
+.pcc-pricing-breakdown {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed #99b4ae;
+}
+
+.pcc-pricing-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  color: #23403c;
+}
+
+.pcc-pricing-row strong {
+  white-space: nowrap;
+}
+
+.pcc-pricing-row-total {
+  margin-top: 12px;
+  padding-top: 9px;
+  border-top: 1px solid #b4cbc6;
+  font-size: 1.02rem;
+  color: #0f4f39;
+}
+
+.pcc-coupon-status {
+  margin-top: 12px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.pcc-coupon-status.ok {
+  background: #e3f5ee;
+  border: 1px solid #8bc5b0;
+  color: #14563f;
+}
+
+.pcc-coupon-status.error {
+  background: #fdeeee;
+  border: 1px solid #efb0b0;
+  color: #8f1f1f;
+}
+
+.pcc-coupon-status.info {
+  background: #eef5ff;
+  border: 1px solid #bdd2f0;
+  color: #274f87;
+}
+
+.pcc-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+}
+
+.dbg {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 17, 15, 0.58);
+  z-index: 999;
+}
+
+.dbug {
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  width: min(560px, calc(100% - 24px));
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+.dbugbox {
+  position: relative;
+  border: 1px solid #678780;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(11, 32, 27, 0.36);
+}
+
+.dbugh {
+  display: block;
+  background: #e0f1ec;
+  color: #21413a;
+  font: 700 16px/1.2 "Google Sans", "Segoe UI", sans-serif;
+  padding: 11px 46px 11px 14px;
+  border-bottom: 1px solid #bed8d1;
+}
+
+.dbugm {
+  display: block;
+  padding: 14px;
+  min-height: 90px;
+  color: #253e3a;
+}
+
+.pcc-share-link-copy {
+  margin: 0 0 10px;
+  line-height: 1.5;
+  color: #30454a;
+}
+
+.pcc-share-link-textarea {
+  display: block;
+  width: 100%;
+  min-height: 108px;
+  resize: vertical;
+  border: 1px solid #b8c6dd;
+  border-radius: 6px;
+  background: #f7faff;
+  color: #1f3457;
+  padding: 12px;
+  font: 400 13px/1.5 "Google Sans", "Segoe UI", sans-serif;
+}
+
+.pcc-share-link-textarea:focus {
+  outline: none;
+  border-color: #5c81d9;
+  box-shadow: 0 0 0 3px rgba(92, 129, 217, 0.16);
+}
+
+.dbugx {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  cursor: pointer;
+}
+
+.pcc-review-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pcc-review-copy {
+  margin: 0;
+  color: #30454a;
+  line-height: 1.6;
+}
+
+.pcc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.pcc-actions-primary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 10px;
+}
+
+.pcc-actions-primary .pcc-action-button {
+  width: 100%;
+}
+
+.pcc-actions-history {
+  justify-content: flex-end;
+}
+
+.pcc-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #0f4e3a;
+  border-radius: 6px;
+  background: var(--pcc-brand);
+  color: #fff;
+  font: 700 13px/1.2 "Google Sans", "Segoe UI", sans-serif;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.pcc-action-button:hover {
+  background: var(--pcc-brand-dark);
+}
+
+.pcc-action-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(20, 104, 77, 0.16);
+}
+
+.pcc-action-button.is-secondary {
+  border-color: #bfcfe8;
+  background: #eef4ff;
+  color: #1f3f74;
+}
+
+.pcc-action-button.is-secondary:hover {
+  background: #dde9ff;
+}
+
+.pcc-action-button.is-ghost {
+  border-color: #c7d3d0;
+  background: #fff;
+  color: #23403c;
+}
+
+.pcc-action-button.is-ghost:hover {
+  background: #f4f8f7;
+}
+
+.pcc-mail-dialog-row .pcc-action-button {
+  flex: 0 0 auto;
+}
+
+.pcc-actions-history .pcc-action-button {
+  min-width: 124px;
+}
+
+.pcc-action-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.pcc-inline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid #1d674f;
+  border-radius: 6px;
+  background: var(--pcc-brand);
+  color: #fff;
+  font: 700 14px/1.15 "Google Sans", "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.pcc-inline-button:hover {
+  background: var(--pcc-brand-dark);
+}
+
+.pcc-inline-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(20, 104, 77, 0.16);
+}
+
+.pcc-inline-button.is-ghost {
+  border-color: #c7d3d0;
+  background: #fff;
+  color: #23403c;
+}
+
+.pcc-inline-button.is-ghost:hover {
+  background: #f4f8f7;
+}
+
+.pcc-inline-button.is-soft {
+  border-color: #1d674f;
+  background: #f4faf8;
+  color: #14563f;
+}
+
+.pcc-inline-button.is-soft:hover {
+  background: #eaf6f1;
+}
+
+.pcc-inline-button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pcc-inline-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.pcc-quote-meta {
+  margin-top: 12px;
+  font-size: 0.92rem;
+  color: #27463f;
+}
+
+.pcc-step {
+  display: none;
+}
+
+.pcc-step.pcc-step-active {
+  display: block;
+}
+
+.pcc-wizard-progress {
+  margin-bottom: 18px;
+}
+
+.pcc-wizard-track {
+  height: 10px;
+  border-radius: 6px;
+  background: #e2eeeb;
+  overflow: hidden;
+}
+
+.pcc-wizard-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--pcc-accent), var(--pcc-brand));
+  transition: width 0.25s ease;
+}
+
+.pcc-wizard-steps {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pcc-wizard-steps li {
+  border: 1px solid #cbdad6;
+  border-radius: 6px;
+  background: #f6fbf9;
+  color: #335750;
+  font: 600 12px/1.2 "Google Sans", "Segoe UI", sans-serif;
+  padding: 8px 9px;
+  text-align: center;
+}
+
+.pcc-wizard-steps li.is-active {
+  border-color: #2f9271;
+  background: #e8f6f1;
+  color: #14563f;
+}
+
+.pcc-wizard-steps li.is-done {
+  border-color: #8dc0ac;
+  background: #eef8f4;
+  color: #1f6b51;
+}
+
+.pcc-wizard-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pcc-wizard-nav .pcc-inline-button {
+  flex: 1 1 0;
+}
+
+.pcc-field-error {
+  margin-top: 6px;
+  font-size: 0.86rem;
+  color: #9a1c1c;
+}
+
+.pcc-validation-summary {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #efb0b0;
+  background: #fdeeee;
+  color: #8f1f1f;
+}
+
+.pcc-validation-summary ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+[data-pcc-repeater] {
+  margin-top: 10px;
+}
+
+.pcc-repeater-button {
+  min-height: 36px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.pcc-repeater-add {
+  margin-top: 10px;
+}
+
+.pcc-repeater-remove {
+  margin-top: 8px;
+}
+
+.pcc-debug-panel {
+  margin-top: 14px;
+  border: 1px solid #c9dad6;
+  border-radius: 8px;
+  background: #f7fcfa;
+  padding: 12px;
+}
+
+.pcc-debug-panel h4 {
+  margin: 0 0 10px;
+  color: #1d4f41;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.pcc-debug-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pcc-debug-col {
+  border: 1px solid #dbe8e5;
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px;
+}
+
+.pcc-debug-col h5 {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  color: #335750;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.pcc-debug-col ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.86rem;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.pcc-debug-col li + li {
+  margin-top: 5px;
+}
+
+.pcc-debug-col strong.ok {
+  color: #186247;
+}
+
+.pcc-debug-col strong.fail {
+  color: #8f1f1f;
+}
+
+.pcc-debug-empty {
+  color: #5f7773;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 880px) {
+  .pcc-debug-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .pcc-wizard-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

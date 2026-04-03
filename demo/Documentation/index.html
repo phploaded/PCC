@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PCC Documentation</title>
+  <style>
+    :root {
+      --ink: #173734;
+      --ink-soft: #375654;
+      --line: #ccdcda;
+      --panel: #ffffff;
+      --bg: #f4f8f7;
+      --brand: #165f47;
+      --warn: #9e4b10;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 400 16px/1.6 "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 24px auto 48px;
+      padding: 0 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    h1, h2, h3 { margin: 0 0 10px; }
+    h1 { font-size: 2rem; }
+    h2 {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 1.25rem;
+    }
+    h3 { font-size: 1.05rem; color: var(--ink-soft); }
+
+    a { color: var(--brand); }
+    code {
+      background: #eef4f3;
+      border: 1px solid #dae7e4;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    pre {
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #d4e3e0;
+      background: #f8fbfb;
+      overflow: auto;
+    }
+
+    ul, ol { margin: 8px 0 0 22px; }
+    .muted { color: #597573; }
+    .warn {
+      border-left: 4px solid var(--warn);
+      background: #fff4ea;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .mini { font-size: 0.92rem; }
+    .site-credit {
+      max-width: 1080px;
+      margin: 28px auto 24px;
+      padding: 0 18px;
+      text-align: center;
+      color: #597573;
+      font-size: 0.95rem;
+    }
+    .site-credit a {
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .site-credit a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>PCC - Project Cost Calculator</h1>
+      <p class="muted">Updated: 2026-02-27</p>
+      <p>This version runs on <strong>jQuery 4.0.0</strong> and includes a 10-scenario real-life demo hub, schema-driven themed demos, strict validation, quote persistence, local autosave/share state, and print/PDF/CSV export from live summary.</p>
+    </div>
+
+    <div class="card">
+      <h2>1) Package Structure</h2>
+      <ul>
+        <li><code>index.php</code> - scenario hub listing 10 real-life demo types</li>
+        <li><code>scenario-demo.php</code> - runtime page for each scenario (<code>?scenario=slug</code>)</li>
+        <li><code>scenario-demo.js</code> - schema configs + runtime logic for all scenarios</li>
+        <li><code>scenario-demo.css</code> - themed styling variants per scenario</li>
+        <li><code>builder.php</code> - visual schema builder + live renderer</li>
+        <li><code>legacy-demo.html</code> - retained legacy demo</li>
+        <li><code>demo.css</code> - previous single-demo stylesheet (retained)</li>
+        <li><code>builder.css</code> - visual builder page styling</li>
+        <li><code>lib-pcc/jquery-4.0.0.min.js</code> - jQuery runtime</li>
+        <li><code>lib-pcc/jquery.pcc.js</code> - plugin logic</li>
+        <li><code>lib-pcc/jquery.pcc.min.js</code> - synchronized plugin build</li>
+        <li><code>lib-pcc/pcc.css</code> - plugin UI styles (summary/actions/wizard/modal)</li>
+        <li><code>send_email.php</code> - secured email endpoint</li>
+        <li><code>quote_storage.php</code> - SQLite quote storage layer</li>
+        <li><code>quote_api.php</code> - save/load quote JSON API</li>
+        <li><code>admin_quotes.php</code> - quote records admin viewer</li>
+        <li><code>CHANGELOG.md</code> - plugin release history</li>
+        <li><code>MIGRATION_GUIDE.md</code> - upgrade notes for integrators</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>2) Base Integration</h2>
+      <pre>&lt;script&gt;wpcc_domain = 'https://yourdomain.com/PCC';&lt;/script&gt;
+&lt;script&gt;wpcc_csrf_token = 'server-generated-token';&lt;/script&gt;
+&lt;script src="lib-pcc/jquery-4.0.0.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"&gt;&lt;/script&gt;
+&lt;script src="lib-pcc/jquery.pcc.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="lib-pcc/pcc.css" /&gt;
+&lt;script&gt;jQuery(function($){ $('#my-form').pcc(); });&lt;/script&gt;</pre>
+      <p class="mini muted">If jsPDF is not loaded, PDF action falls back to print mode.</p>
+    </div>
+
+    <div class="card">
+      <h2>3) Required Form Markup</h2>
+      <p>Each calculator form must use class <code>pcc-form</code> with an ID. The summary container must be that ID plus <code>-show</code>.</p>
+      <pre>&lt;form id="myquote" class="pcc-form" data-curr=" USD"&gt;...&lt;/form&gt;
+&lt;div id="myquote-show" class="wpcc-preview"&gt;&lt;/div&gt;</pre>
+      <h3>Cost fields</h3>
+      <ul>
+        <li><code>data-title</code> - line item label</li>
+        <li><code>data-cost</code> - fixed cost or <code>this</code></li>
+        <li><code>data-mult</code> - multiplier</li>
+        <li>form-level pricing: <code>data-tax-rate</code>, <code>data-discount-fixed</code>, <code>data-discount-percent</code>, <code>data-coupons</code> JSON</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>4) Strong Validation System</h2>
+      <p>PCC supports required fields, numeric bounds, length bounds, regex, type checks, and custom messages per field.</p>
+      <h3>Supported validation attributes</h3>
+      <ul>
+        <li><code>data-required="1"</code></li>
+        <li><code>data-min</code>, <code>data-max</code> (numeric bounds)</li>
+        <li><code>data-minlen</code>, <code>data-maxlen</code></li>
+        <li><code>data-pattern</code> (JavaScript regex body)</li>
+        <li><code>data-validate="email|number"</code></li>
+      </ul>
+      <h3>Custom message attributes</h3>
+      <ul>
+        <li><code>data-msg-required</code>, <code>data-msg-min</code>, <code>data-msg-max</code></li>
+        <li><code>data-msg-minlen</code>, <code>data-msg-maxlen</code></li>
+        <li><code>data-msg-pattern</code>, <code>data-msg-email</code>, <code>data-msg-number</code></li>
+      </ul>
+      <pre>&lt;input
+  name="client_phone"
+  data-title="Phone Number"
+  data-required="1"
+  data-pattern="^[0-9+()\\-\\s]{10,20}$"
+  data-msg-required="Phone number is required."
+  data-msg-pattern="Use a valid phone format."
+/&gt;</pre>
+      <p class="mini muted">Invalid fields/groups get <code>.pcc-invalid</code> and are blocked before wizard next step or email send.</p>
+    </div>
+
+    <div class="card">
+      <h2>5) Multi-step Wizard Mode</h2>
+      <ul>
+        <li>Enable with <code>data-wizard="1"</code> on form.</li>
+        <li>Wrap each step in <code>.pcc-step</code> and optional <code>data-step-title</code>.</li>
+        <li>Plugin adds progress bar, step labels, and previous/next navigation.</li>
+        <li>Validation runs per current step when pressing Next.</li>
+      </ul>
+      <pre>&lt;form class="pcc-form" id="quote" data-wizard="1"&gt;
+  &lt;section class="pcc-step" data-step-title="Scope"&gt;...&lt;/section&gt;
+  &lt;section class="pcc-step" data-step-title="Contact"&gt;...&lt;/section&gt;
+&lt;/form&gt;</pre>
+    </div>
+
+    <div class="card">
+      <h2>6) Save/Restore + Share State</h2>
+      <ul>
+        <li>Autosave draft to LocalStorage on form changes.</li>
+        <li><strong>Save Quote</strong> writes quote to SQLite via <code>quote_api.php?action=save</code>.</li>
+        <li><strong>Load Last</strong> restores most recently saved quote for this form.</li>
+        <li><strong>Share</strong> copies URL with <code>pcc_state</code> payload for browser-to-browser restore.</li>
+        <li>Saved quote IDs are also reflected using URL param <code>quote_id</code>.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>7) Export Options</h2>
+      <ul>
+        <li><strong>Print</strong> - opens printable quote view.</li>
+        <li><strong>CSV</strong> - exports summary lines as CSV file.</li>
+        <li><strong>PDF</strong> - generates PDF using jsPDF if available.</li>
+      </ul>
+      <p class="mini muted">All exports are generated from the live summary output (<code>#formid-show</code>).</p>
+    </div>
+
+    <div class="card">
+      <h2>8) Conditional Logic + Coupons</h2>
+      <ul>
+        <li><code>data-show-if</code> supports <code>field=value</code>, <code>field!=value</code>, OR with <code>|</code>, and multiple clauses with <code>;</code>.</li>
+        <li>Hidden conditional blocks are disabled and excluded from pricing/validation.</li>
+        <li>Coupon rules come from form <code>data-coupons</code> JSON map.</li>
+      </ul>
+      <div class="warn mini">
+        <strong>Example:</strong> <code>data-show-if="timeline=2500;project_scope!=8500"</code>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>9) jQuery Plugin API</h2>
+      <p>PCC now exposes a public API for host projects:</p>
+      <pre>$('#my-form').pcc(); // init
+$('#my-form').pcc('recalc');
+$('#my-form').pcc('validate');
+$('#my-form').pcc('getState');
+$('#my-form').pcc('setState', stateObj);
+$('#my-form').pcc('goToStep', 2);
+$('#my-form').pcc('undo');
+$('#my-form').pcc('redo');
+$('#my-form').pcc('destroy');</pre>
+      <p class="mini muted">Utility object: <code>$.pcc.version</code>, <code>$.pcc.defaults</code>, <code>$.pcc.registerAdapter(name, binder)</code>, <code>$.pcc.recalcAll()</code>.</p>
+    </div>
+
+    <div class="card">
+      <h2>10) Events and Hooks</h2>
+      <p>Plugin emits extension events for host apps and no-core-edit customization.</p>
+      <ul>
+        <li><code>pcc:beforeCalc</code></li>
+        <li><code>pcc:afterCalc</code></li>
+        <li><code>pcc:validationFail</code></li>
+        <li><code>pcc:stepChange</code></li>
+        <li><code>pcc:stateChange</code></li>
+      </ul>
+      <pre>$('#my-form').on('pcc:afterCalc', function (e, payload) {
+  console.log(payload.finalTotal);
+});</pre>
+    </div>
+
+    <div class="card">
+      <h2>11) Formula Engine and Advanced Rules</h2>
+      <ul>
+        <li>Use <code>data-formula</code> with field references: <code>{field_name}</code>.</li>
+        <li>Supported math helpers: <code>min</code>, <code>max</code>, <code>abs</code>, <code>round</code>, <code>ceil</code>, <code>floor</code>, <code>pow</code>.</li>
+        <li>Conditional rules now support <code>&amp;&amp;</code>, <code>||</code>, <code>()</code>, and comparisons <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>, <code>=</code>.</li>
+      </ul>
+      <pre>&lt;input data-formula="({floor_area}*0.3)+({room_count}*120)" /&gt;
+&lt;div data-show-if="(timeline=2500 || project_scope=22000) &amp;&amp; floor_area&gt;=1000"&gt;&lt;/div&gt;</pre>
+    </div>
+
+    <div class="card">
+      <h2>12) Schema Mode and Visual Builder</h2>
+      <ul>
+        <li>Use <code>$.pcc.validateSchema(schema)</code> to validate config.</li>
+        <li>Use <code>$.pcc.schemaToHtml(schema)</code> to generate markup string.</li>
+        <li>Use <code>$.pcc.renderSchema(target, schema, options)</code> to render and initialize live form.</li>
+        <li>Builder page <code>builder.php</code> provides visual field/step editing and JSON transport workflow.</li>
+      </ul>
+      <pre>const result = $.pcc.renderSchema('#preview', schemaConfig, {
+  skipRestore: true,
+  autosave: false
+});</pre>
+      <p class="mini muted">Builder supports copy JSON, download JSON (Blob API), import JSON, and render back to interactive form.</p>
+    </div>
+
+    <div class="card">
+      <h2>13) Rule Debugger Panel</h2>
+      <ul>
+        <li>Enable globally with option <code>ruleDebugger: true</code> or form attribute <code>data-rule-debugger="1"</code>.</li>
+        <li>Shows real-time formula expansion/evaluation and conditional rule pass/fail outputs.</li>
+        <li>Useful when building and testing complex schema rules.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>14) Repeaters, Adapters, and History</h2>
+      <ul>
+        <li>Repeaters: <code>data-pcc-repeater</code> + <code>data-pcc-repeat-item</code> with built-in add/remove actions.</li>
+        <li>Input adapters: built-in hooks for Select2, datepicker, slider, and masked inputs.</li>
+        <li>State history: undo/redo buttons and keyboard shortcuts (<code>Ctrl/Cmd+Z</code>, <code>Ctrl/Cmd+Y</code>, <code>Shift+Ctrl/Cmd+Z</code>).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>15) i18n, Theming, Templates, Accessibility</h2>
+      <ul>
+        <li>Locale-aware number formatting via <code>data-locale</code> / options.</li>
+        <li>Theme variables via form options (<code>theme</code> map -> <code>--pcc-*</code> CSS vars).</li>
+        <li>Template callbacks for pricing rows, action buttons, quote meta, and validation output.</li>
+        <li>Accessibility upgrades: aria-live totals, dialog semantics, keyboard wizard navigation, and error associations.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>16) Quote API and Admin</h2>
+      <ul>
+        <li><code>POST quote_api.php?action=save</code> with CSRF token stores quote payload.</li>
+        <li><code>GET quote_api.php?action=get&amp;quote_id=...</code> returns quote JSON.</li>
+        <li><code>admin_quotes.php</code> lists saved quotes and shows quote detail.</li>
+      </ul>
+      <p class="mini muted">SQLite database file is auto-created at <code>data/pcc_quotes.sqlite</code>.</p>
+    </div>
+
+    <div class="card">
+      <h2>17) Security Notes</h2>
+      <ul>
+        <li><code>send_email.php</code> validates CSRF, honeypot, and request timing.</li>
+        <li>Rate limiting is enforced (5 requests / 15 minutes).</li>
+        <li>Input is sanitized before email generation.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>18) Demo URLs</h2>
+      <ul>
+        <li>Scenario hub: <a href="/PCC/">/PCC/</a></li>
+        <li>Scenario runtime example: <a href="/PCC/scenario-demo.php?scenario=computer-assembly">/PCC/scenario-demo.php?scenario=computer-assembly</a></li>
+        <li>Visual builder: <a href="/PCC/builder.php">/PCC/builder.php</a></li>
+        <li>Saved quotes admin: <a href="/PCC/admin_quotes.php">/PCC/admin_quotes.php</a></li>
+        <li>Legacy demo: <a href="/PCC/legacy-demo.html">/PCC/legacy-demo.html</a></li>
+      </ul>
+    </div>
+  </div>
+  <footer class="site-credit">
+    A product of <a href="https://phploaded.com" target="_blank" rel="noopener noreferrer">phploaded.com</a>
+  </footer>
+</body>
+</html>

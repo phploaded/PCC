@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PCC - Project Cost Calculator</title>
+<meta charset="windows-1252" />
+<script>wpcc_domain = 'http://yoursite.com/some/path';</script>
+<script type="text/javascript" src="lib-pcc/jquery-4.0.0.min.js"></script>
+<script type="text/javascript" src="lib-pcc/jquery.pcc.js"></script>
+<link type="text/css" rel="stylesheet" href="lib-pcc/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<div class="container">
+Welcome, Guest<br /><br />
+PCC stands for Project Cost Calculator. Below of the page, you have a demo forms for <b>web developent company</b>, <b>Party Cake Bakery</b> and a demo of <b>custom PC builder.</b> <b style="color:red;">Please note that you dont have to copy exactly same forms given here, but using this jQuery plugin, you can build your own forms as you like, with your own options, features and costs.</b> You can have multiple forms at same page.
+<br /><br /><b>NEW : </b>You can change the currency and green button text.
+<br /><b>NEW : </b>You can charge based on per item now ( item_cost X total_items = total_for_the_item ).
+<br /><b>NEW : </b>You can create textboxes and textareas to get user information, they will only appear in email.
+<br /><br />
+<h2>PCC Demo 1 - Web Development Company</h2>
+<div class="demo-form">
+<form name="ccc" action="legacy-demo.html" class="pcc-form" id="abc" method="post">
+<h3>How many mock-ups required?</h3><select data-title="How many mock-ups required?" name="523b8a7afe7f1"><option data-cost="0">I already have the design</option>
+<option data-cost="50">1 mockup</option>
+<option data-cost="90">2 mockups</option>
+<option data-cost="120">3 mockups</option></select>
+
+
+
+<h3>Design Complexity</h3><select data-title="Design Complexity" name="523b8a7afe7f1"><option data-cost="0">You will provide the design</option>
+<option data-cost="20">Standard</option>
+<option data-cost="30">Advanced</option>
+<option data-cost="35">Deluxe</option>
+<option data-cost="40">Corporate</option>
+<option data-cost="45">Enterprise</option></select>
+
+
+<h3>CMS ( Content Management System ) to be used</h3><select data-title="CMS ( Content Management System ) to be used" name="523b8a7afe7f1"><option data-cost="100">WordPress</option>
+<option data-cost="200">Joomla</option>
+<option data-cost="120">Blogger</option>
+<option data-cost="190">Codeigniter Framework</option>
+<option data-cost="200">Custom PHP CMS</option></select>
+
+
+<h3>Mobile Device Compatibility</h3><input type="hidden" name="523b8b50f9bbfx-name" data-title="Mobile Device Compatibility" /><input checked="checked" type="radio" value="30" data-cost="this" data-title="Compatible" name="523b8b50f9bbfx" /> Compatible<br /><input type="radio" value="0" data-cost="this" data-title="Not-Compatible" name="523b8b50f9bbfx" /> Not-Compatible<br />
+
+
+<h3>No. of Inner pages, each page costs  0.5 EUR</h3><input type="text" data-cost="this" data-mult="0.5" data-title="No. of Inner pages, each page costs 0.5 EUR" value="10" name="52423c0db10cb" />
+
+
+<h3>Add-ons</h3><input type="hidden" name="523b8b50f9bc0-name" data-title="Add-ons" /><input checked="checked" type="checkbox" value="10" data-cost="this" data-title="Image slider" name="523b8b50f9bc0[]" /> Image slider<br /><input checked="checked" type="checkbox" value="50" data-cost="this" data-title="Custom Logo Design" name="523b8b50f9bc0[]" /> Custom Logo Design<br /><input type="checkbox" value="30" data-cost="this" data-title="Photo gallery" name="523b8b50f9bc0[]" /> Photo gallery<br /><input checked="checked" type="checkbox" value="5" data-cost="this" data-title="Contact form" name="523b8b50f9bc0[]" /> Contact form<br />
+
+
+<h3>SEO (Search engine optimization)</h3><input type="hidden" name="523b8b50f9bbfz-name" data-title="SEO (Search engine optimization)" /><input type="radio" value="0" data-cost="this" data-title="No SEO" name="523b8b50f9bbfz" /> No SEO<br /><input type="radio" value="100" data-cost="this" data-title="Basic SEO" name="523b8b50f9bbfz" /> Basic SEO<br /><input checked="checked" type="radio" value="200" data-cost="this" data-title="Advanced SEO " name="523b8b50f9bbfz" /> Advanced SEO <br />
+
+
+<h3>Would you like to donate for HelpAge-India? If yes enter amount, else leave it intact.</h3><input type="text" data-cost="this" data-title="Would you like to donate for HelpAge-India? If yes enter amount, else leave it intact." name="523b8b50f9bbd" />
+
+
+<h3>If you start this project within a month, you will get $50 discount on this whole package.</h3><input type="hidden" name="523b8b50f9bbfa-name" data-title="If you start this project within a month, you will get $50 discount on this whole package." /><input type="radio" value="-30" data-cost="this" data-title="Yes, i would like to have this offer" name="523b8b50f9bbfa" checked="checked" /> Yes, i would like to have this offer<br /><input type="radio" value="0" data-cost="this" data-title="No, this project will start later" name="523b8b50f9bbfa" /> No, this project will start later<br />
+
+
+<h3>Your name</h3><input value="your name here.." class="wpcc-xtra" type="text" name="523b8d9f70b5x" />
+
+
+<h3>Your contact number</h3><input class="wpcc-xtra" value="your mobile no.." type="text" name="523b8d9f70b5a" />
+
+
+<h3>Please enter any additional information that you would like to share or ask.</h3><textarea rows="6" cols="50" class="wpcc-xtra" name="523b8d9f70b5b">enter important information only..</textarea>
+
+</form>
+
+
+<br /><br />
+<div class="wpcc-preview" id="abc-show">
+No Data available
+</div>
+</div><!-- End Demoform 1 -->
+
+
+<h2>PCC Demo 2 - Party Cake Bakery</h2>
+<div class="demo-form">
+<form name="ccc" action="legacy-demo.html" data-curr=" CAD" class="pcc-form" id="xyyz" method="post">
+<h3>Weight of cake</h3><select data-title="Weight of cake" name="523b8491e454e"> <option data-cost="10">1 pound</option> <option data-cost="20">2 pounds</option> <option data-cost="30">3 pounds</option> <option data-cost="39">4 pounds</option> <option data-cost="49">5 pounds</option> <option data-cost="58">6 pounds</option> <option data-cost="87">8 pounds</option> <option data-cost="96">10 pounds</option></select>
+
+<h3>Cake flavor</h3><input type="hidden" name="523b8491e454f-name" data-title="Cake flavor" /><input type="radio" value="2" data-cost="this" data-title="Opera" name="523b8491e454f" /> Opera<br /><input type="radio" value="4" data-cost="this" data-title="Vanilla" name="523b8491e454f" /> Vanilla<br /><input type="radio" value="3" data-cost="this" data-title="Strawberry" name="523b8491e454f" checked="checked" /> Strawberry<br /><input type="radio" value="4" data-cost="this" data-title="Orange" name="523b8491e454f" /> Orange<br /><input type="radio" value="5" data-cost="this" data-title="Chocolate" name="523b8491e454f" /> Chocolate<br />
+
+<h3>Additional Items</h3><input type="hidden" name="523b8491e4550-name" data-title="Additional Items" /><input type="checkbox" checked="checked" value="5" data-cost="this" data-title="Birthday candle pack" name="523b8491e4550[]" /> Birthday candle pack<br /><input checked="checked" type="checkbox" value="5" data-cost="this" data-title="Balloons" name="523b8491e4550[]" /> Balloons<br /><input checked="checked" type="checkbox" value="4" data-cost="this" data-title="Coloured Paper Strips" name="523b8491e4550[]" /> Coloured Paper Strips<br /><input type="checkbox" value="10" data-cost="this" data-title="Paper Plate Pack" name="523b8491e4550[]" /> Paper Plate Pack<br />
+
+<h3>Soft Drink bottles, 1.4 CAD each</h3><input type="text" data-cost="this" data-mult="1.4" data-title="Soft Drink bottles, 1.4 CAD each" name="52423b0b079a5" />
+
+<h3>Would you like to give us tips? if yes then enter the amount</h3><input type="text" data-cost="this" data-title="Would you like to give us tips? if yes then enter the amount" name="523b8491e454d" />
+
+<h3>Enter your full name</h3><input class="wpcc-xtra" type="text" value="enter name" name="523b8491e4551" />
+
+<h3>Enter your address, where we sould deliever</h3><textarea class="wpcc-xtra" name="523b8491e4552">your address here...</textarea>
+</form>
+
+
+<br /><br />
+<div class="wpcc-preview" id="xyyz-show">
+No Data available
+</div>
+</div><!-- End Demoform 2 -->
+
+
+
+<h2>PCC Demo 3 - Build Custom PC</h2>
+<div class="demo-form">
+<form data-curr=" EUR" name="ccc" action="legacy-demo.html" class="pcc-form" id="pcform" method="post">
+<h3>Memory Modules( RAM )</h3><select data-title="Memory Modules( RAM )" name="523dd2b9c2b14"> <option data-cost="10">1 GB</option> <option data-cost="19">2 GB</option> <option data-cost="37">4 GB</option> <option data-cost="72">8 GB</option></select>
+
+<h3>Hard Disc Size</h3><select data-title="Hard Disc Size" name="523dd3bb639cd"> <option data-cost="50">500 GB</option> <option data-cost="95">1 TB</option> <option data-cost="190">2 TB</option> <option data-cost="370">4 TB</option></select>
+
+<h3>Additional Items</h3><input type="hidden" name="523dd3bb639cf-name" data-title="Additional Items" /><input type="checkbox" value="20" data-cost="this" data-title="Pendrive (16gb)" name="523dd3bb639cf[]" /> Pendrive (16gb)<br /><input type="checkbox" value="9" data-cost="this" data-title="Webcam, 3MP" name="523dd3bb639cf[]" /> Webcam, 3MP<br /><input checked="checked" type="checkbox" value="4" data-cost="this" data-title="Headphone with Mic" name="523dd3bb639cf[]" /> Headphone with Mic<br /><input type="checkbox" value="2" data-cost="this" data-title="Bluetooth Dongle" name="523dd3bb639cf[]" /> Bluetooth Dongle<br /><input type="checkbox" value="8" data-cost="this" data-title="WIFI Dongle" name="523dd3bb639cf[]" /> WIFI Dongle<br /><input type="checkbox" value="2" data-cost="this" data-title="Spike Buster" name="523dd3bb639cf[]" /> Spike Buster<br /><input type="checkbox" checked="checked" value="5" data-cost="this" data-title="Keyboard" name="523dd3bb639cf[]" /> Keyboard<br /><input type="checkbox" checked="checked" value="4" data-cost="this" data-title="Mouse" name="523dd3bb639cf[]" /> Mouse<br /><input type="checkbox" value="5" data-cost="this" data-title="Gamepad" name="523dd3bb639cf[]" /> Gamepad<br />
+
+<h3>Motherboard and Processor</h3><input type="hidden" name="523dd66b65826-name" data-title="Motherboard and Processor" /><input type="radio" value="150" data-cost="this" data-title="AMD X2 3.3GHz + AT56RT ASUS Board" name="523dd66b65826" /> AMD X2 3.3GHz + AT56RT ASUS Board<br /><input type="radio" value="190" data-cost="this" data-title="Intel i3 3.4GHz + Intel QQ224 Board" name="523dd66b65826" /> Intel i3 3.4GHz + Intel QQ224 Board<br /><input type="radio" value="240" data-cost="this" data-title="Intel i5 3.2GHz + Intel QQ228 Board" name="523dd66b65826" /> Intel i5 3.2GHz + Intel QQ228 Board<br /><input type="radio" value="300" data-cost="this" data-title="Intel i7 3.4GHz + Intel QL524 Board" name="523dd66b65826" /> Intel i7 3.4GHz + Intel QL524 Board<br /><input type="radio" checked="checked" value="300" data-cost="this" data-title="AMD X4 3.0GHz + AT56RT ASUS Board" name="523dd66b65826" /> AMD X4 3.0GHz + AT56RT ASUS Board<br />
+
+<h3>Delievery costs, may depend on shipping address, so enter approximately by yourself</h3><input type="text" value="6" data-cost="this" data-title="Delievery costs, approximately by you" name="523dd89257e79" />
+
+<h3>Optical Drive</h3><input type="hidden" name="523ddee5a60fe-name" data-title="Optical Drive" /><input checked="checked" type="radio" value="20" data-cost="this" data-title="DVD RW" name="523ddee5a60fe" /> DVD RW<br /><input type="radio" value="24" data-cost="this" data-title="DVD +-RW" name="523ddee5a60fe" /> DVD +-RW<br /><input type="radio" value="100" data-cost="this" data-title="DVD + BRR" name="523ddee5a60fe" /> DVD + BRR<br /><input type="radio" value="160" data-cost="this" data-title="DVD + BRW" name="523ddee5a60fe" /> DVD + BRW<br />
+
+
+<h3>Blank dual layer DVDs, costs $0.4 each</h3><input type="text" data-cost="this" data-mult="0.4" value="10" data-title="Blank dual layer DVDs, costs $0.4 each" name="524238b852caa" />
+
+
+<h3>Monitor</h3><select data-title="Monitor" name="523de2390adf4"> <option data-cost="600">17 CRT</option> <option data-cost="100">17 TFT</option> <option data-cost="120">19 TFT</option> <option data-cost="150">21 TFT</option> <option data-cost="200">24 TFT</option></select>
+
+<h3>Additional Information : </h3>
+<p>Please note that this is just an approximation of what your pc will cost. Actual costs differ depending on different company items.</p>
+
+<h3>Your name here</h3><input class="wpcc-xtra" type="text" name="523de80050004" />
+
+<h3>If you have any more questions, please enter in below box</h3><textarea cols="50" rows="5" class="wpcc-xtra" name="523de80050005"></textarea>
+</form>
+
+
+<br /><br />
+<div class="wpcc-preview" id="pcform-show">
+No Data available
+</div>
+</div><!-- End Demoform 2 -->
+
+
+
+</div><!-- End Container -->
+<p style="margin:28px auto 24px; padding:0 16px; text-align:center; color:#5f5f5f; font:14px/1.6 'Droid Sans', sans-serif;">A product of <a href="https://phploaded.com" target="_blank" rel="noopener noreferrer" style="color:#000; font-weight:700; text-decoration:none;">phploaded.com</a></p>
+</body>
+</html>
